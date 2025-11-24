@@ -202,24 +202,24 @@ class AnalyticsEngine:
         account_summary = AnalyticsEngine.get_account_summary()
         spending = AnalyticsEngine.get_spending_by_type()
 
-        net_status = "Strong positive position" if summary['net'] >= 0 else "Optimization opportunity identified"
+        net_status = "Güclü müsbət mövqe" if summary['net'] >= 0 else "Optimallaşdırma imkanı müəyyən edildi"
         net_emoji = "📈" if summary['net'] >= 0 else "📉"
 
         text = f"""
-💼 **Executive Business Intelligence**
+💼 **İdarəetmə Biznes İnformasiyası**
 
-**Current Period: {summary['month']}**
-💰 Revenue: ${summary['total_income']:,.2f}
-💸 Operating Costs: ${summary['total_expenses']:,.2f}
-{net_emoji} Net Position: ${summary['net']:,.2f}
-📊 Transaction Volume: {summary['transaction_count']}
+**Cari Dövr: {summary['month']}**
+💰 Gəlir: ${summary['total_income']:,.2f}
+💸 Əməliyyat Xərcləri: ${summary['total_expenses']:,.2f}
+{net_emoji} Xalis Mövqe: ${summary['net']:,.2f}
+📊 Əməliyyat Həcmi: {summary['transaction_count']}
 *{net_status}*
 
-**Portfolio Metrics**
-🏦 Assets Under Management: ${account_summary['total_balance']:,.2f}
-📋 Active Customer Accounts: {account_summary['account_count']}
+**Portfel Göstəriciləri**
+🏦 İdarə Olunan Aktivlər: ${account_summary['total_balance']:,.2f}
+📋 Aktiv Müştəri Hesabları: {account_summary['account_count']}
 
-**Major Expenditure Categories**
+**Əsas Xərc Kateqoriyaları**
 """
         total_spending = sum(spending.values())
         for i, (trans_type, amount) in enumerate(sorted(spending.items(), key=lambda x: x[1], reverse=True)[:5], 1):

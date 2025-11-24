@@ -1,737 +1,360 @@
-# Analyst in Pocket - Executive AI Business Intelligence
 
-**Your trusted AI business advisor, always available in your pocket.**
+# Cibinizdə Analitik - İdarəçi Sİ Biznes İnformasiyası
 
-A premium B2B SaaS solution that delivers real-time strategic insights to bank CEOs and executives through Telegram. Combines powerful analytics dashboards with an AI advisor powered by Google Gemini - all accessible through simple conversations.
+**Cibinizdə həmişə mövcud olan etibarlı Sİ biznes məsləhətçiniz.**
 
-## Features
+Bank direktorları və icraçılar üçün Telegram vasitəsilə real vaxt strateji fikirlər çatdıran premium B2B SaaS həlli. Google Gemini tərəfindən dəstəklənən Sİ məsləhətçi ilə güclü analitik panelləri birləşdirir - hamısına sadə danışıqlar vasitəsilə daxil olmaq mümkündür.
 
-### 💼 Executive Dashboard
-- **Portfolio Overview** - Real-time assets under management across all accounts
-- **Transaction Intelligence** - Pattern analysis and operational flow insights
-- **Expenditure Analysis** - Strategic spending breakdown with percentages
-- **Business Performance** - Revenue, costs, and net position tracking
-- **High-Value Monitoring** - Track largest transactions instantly
-- **Interactive Visualizations** - Professional charts generated on-demand
+## Xüsusiyyətlər
 
-### 🤖 AI Business Advisor
-- **Strategic Conversations** - Ask anything about your bank's performance in natural language
-- **Data-Driven Insights** - AI analyzes your real operational data
-- **Executive-Level Communication** - Answers focused on business impact, not technical details
-- **Context-Aware Intelligence** - Remembers conversation history for deeper analysis
-- **24/7 Availability** - Your trusted advisor always in your pocket
-- **Group Support** - Multiple executives can access insights in team channels
+### 💼 İdarəetmə Paneli
 
-### 🎯 Built for Executives
-- No technical jargon - pure business intelligence
-- Instant insights without data analyst dependency
-- Mobile-first design for executives on the go
-- Secure, private conversations per executive
-- Real-time operational metrics
+- **Portfel İcmalı** - Bütün hesablarda real vaxt idarə olunan aktivlər
+- **Əməliyyat İnformasiyası** - Nümunə analizi və əməliyyat axını haqqında fikirlər
+- **Xərc Analizi** - Faizlərlə strateji xərc bölgüsü
+- **Biznes Performansı** - Gəlir, xərc və xalis mövqe izləməsi
+- **Yüksək Dəyərli Monitorinq** - Ən böyük əməliyyatları dərhal izləyin
+- **İnteraktiv Vizuallaşdırmalar** - Tələb əsasında yaradılan peşəkar qrafiklər
 
-## Quick Start with Docker (Recommended)
+### 🤖 Sİ Biznes Məsləhətçi
 
-### Prerequisites
-- Docker and Docker Compose installed
-- Telegram Bot Token
-- Google Gemini API Key
-- PostgreSQL database with `demo_bank` schema
+- **Strateji Danışıqlar** - Bankınızın performansı haqqında təbii dildə hər şeyi soruşun
+- **Məlumata Əsaslanan Fikirlər** - Sİ sizin real əməliyyat məlumatlarınızı təhlil edir
+- **İdarəçi Səviyyəsində Ünsiyyət** - Cavablar texniki detallar deyil, biznes təsirinə fokuslanır
+- **Kontekstdən Xəbərdar İnformasiya** - Daha dərin təhlil üçün danışıq tarixini xatırlayır
+- **24/7 Əlçatanlıq** - Etibarlı məsləhətçiniz həmişə cibinizdədir
+- **Qrup Dəstəyi** - Birdən çox icraçı komanda kanallarında fikirlərə daxil ola bilər
 
-### Setup
+### 🎯 İcraçılar üçün Qurulmuş
 
-1. **Configure environment variables**
+- Texniki jarqon yox - təmiz biznes informasiyası
+- Məlumat analitiki asılılığı olmadan ani fikirlər
+- Yoldakı icraçılar üçün mobil-ilk dizayn
+- Hər icraçı üçün təhlükəsiz, şəxsi danışıqlar
+- Real vaxt əməliyyat göstəriciləri
 
-Edit `.env` file:
+## Docker ilə Sürətli Başlanğıc (Tövsiyə olunur)
+
+### Ön Şərtlər
+
+- Docker və Docker Compose quraşdırılmış
+- Telegram Bot Tokeni
+- Google Gemini API Açarı
+- `demo_bank` sxemi ilə PostgreSQL məlumat bazası
+
+### Quraşdırma
+
+1. **Mühit dəyişənlərini konfiqurasiya edin**
+
+`.env` faylını redaktə edin:
+
 ```env
 DATABASE_URL="postgresql://user:password@host:port/database"
-TELEGRAM_BOT_TOKEN="your_bot_token"
-GEMINI_API_KEY="your_gemini_api_key"
+TELEGRAM_BOT_TOKEN="sizin_bot_tokeniniz"
+GEMINI_API_KEY="sizin_gemini_api_açarınız"
 ADMIN_USER_IDS=""
 ```
 
-2. **Deploy the bot**
+2. **Botu yerləşdirin**
 
 ```bash
-# Make deploy script executable (first time only)
+# Deploy skriptini icra edilə bilən edin (yalnız ilk dəfə)
 chmod +x deploy.sh
 
-# Deploy
+# Yerləşdirin
 ./deploy.sh
 ```
 
-3. **Bot is now running!** Open Telegram and send `/start` to your bot.
+3. **Bot indi işləyir!** Telegram-ı açın və botunuza `/start` göndərin.
 
-### Docker Commands
+## Necə İstifadə Etmək Olar
 
-```bash
-# View logs
-docker-compose logs -f
+### 🚀 Başlanğıc
 
-# Stop bot
-docker-compose down
+1. **Botu başladın** - Telegram-da botunuza `/start` göndərin
+2. **Panelə daxil olun** - İnteraktiv göstəricilər üçün `/analytics` istifadə edin
+3. **Sual verin** - Strateji suallarınızla sadəcə bota təbii şəkildə mesaj göndərin
 
-# Restart bot
-docker-compose restart
+### 💬 Sİ Biznes Məsləhətçidən İstifadə
 
-# Rebuild and restart
-docker-compose up -d --build
-```
+#### Şəxsi Söhbətlərdə
 
-## Manual Setup (Without Docker)
+Sadəcə istənilən strateji sual ilə bota mesaj göndərin:
 
-### Prerequisites
-- Python 3.11 or higher
-- PostgreSQL database with `demo_bank` schema
-- Telegram Bot Token
-- Google Gemini API Key
-
-### Installation
-
-```bash
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Test setup
-python test_bot.py
-
-# Run bot
-python bot.py
-```
-
-## Getting API Keys
-
-### Telegram Bot Token
-1. Open Telegram and search for `@BotFather`
-2. Send `/newbot` and follow the instructions
-3. Copy the token provided
-
-### Gemini API Key
-1. Visit https://makersuite.google.com/app/apikey
-2. Create a new API key
-3. Copy the key
-
-## Database Schema
-
-The bot uses the existing `demo_bank` PostgreSQL schema with the following tables:
-
-- **customers** - Bank customer information and account details
-- **transactions** - Financial transactions (deposits, withdrawals, transfers, loan payments)
-- **loans** - Loan information
-- **telegram_users** - Bot users (created automatically)
-- **chat_history** - Conversation history (created automatically)
-
-See `database/DEMO_BANK_DOCUMENTATION.md` for complete schema documentation.
-
-## How to Use
-
-### 🚀 Getting Started
-
-1. **Start the bot** - Send `/start` to your bot in Telegram
-2. **Access the dashboard** - Use `/analytics` for interactive metrics
-3. **Ask questions** - Just message the bot naturally with your strategic questions
-
-### 💬 Using the AI Business Advisor
-
-#### In Private Chats
-
-Simply message the bot with any strategic question:
-
-**Example Conversations:**
+**Nümunə Danışıqlar:**
 
 ```
-Executive: What are our growth opportunities?
-Bot: Based on your current portfolio of $487K across 5 active accounts
-with a positive net position of $11.2K this month, I identify three key
-growth opportunities:
+İcraçı: Bizim böyümə imkanlarımız nələrdir?
+Bot: Cari 5 aktiv hesabda $487K portfeliniz və bu ay $11.2K müsbət
+xalis mövqeyinizlə, mən üç əsas böyümə imkanı müəyyən edirəm:
 
-1. Customer acquisition potential - Current transaction volume shows
-   capacity for 20-30% more active accounts
-2. Loan portfolio expansion - Only $125K in active loans suggests
-   untapped lending revenue
-3. Fee optimization - Current fee structure could be adjusted to increase
-   revenue by an estimated 8-12%
+1. Müştəri əldə etmə potensialı
+2. Kredit portfeli genişlənməsi
+3. Rüsum optimallaşdırması
 
-Recommendation: Focus on customer acquisition first to maximize
-transaction volume before adjusting pricing.
+Tövsiyə: İlk növbədə əməliyyat həcmini maksimuma çatdırmaq üçün
+müştəri əldə etməyə fokuslanın.
 ```
 
-```
-Executive: Analyze our loan portfolio risk
-Bot: Current loan portfolio analysis:
+#### Qrup Söhbətlərində (İcraçı Komandaları)
 
-Portfolio Value: $125,450
-Active Loans: 3 accounts
-Avg Loan Size: $41,817
+Bot onu qeyd etdiyiniz və ya mesajlarına cavab verdiyiniz zaman cavab verir:
 
-Risk Assessment: LOW-MODERATE
-- Payment consistency: 100% on-time in last 90 days
-- Portfolio concentration: Well-diversified across customer base
-- Default indicators: None detected
-
-Strategic recommendation: Portfolio health is strong. Consider expanding
-lending operations given the low-risk performance.
-```
+**Üsul 1: Botu qeyd edin**
 
 ```
-Executive: Show me where we're losing money
-Bot: Cost analysis reveals key expenditure areas:
-
-Total Operating Costs: $4,067.56 this period
-
-Breakdown:
-1. Loan Payments: $3,567.56 (87.7%) - Major outflow
-2. Withdrawals: $500.00 (12.3%) - Operational costs
-
-Strategic insight: Loan servicing represents your largest expense at
-nearly 88% of costs. This is within normal banking operations, but
-consider:
-- Refinancing opportunities to reduce interest burden
-- Revenue diversification to offset loan servicing costs
-- Fee income optimization to improve net margins
-
-Current net position is positive, but margin improvement opportunity
-exists through revenue growth rather than cost cutting.
+@sizin_bot_username Əməliyyat həcmi trendi necədir?
 ```
 
-#### In Group Chats (Executive Teams)
+**Qeyd:** `@sizin_bot_username` əvəzinə öz botunuzun istifadəçi adını yazın (böyük-kiçik hərf ayrımı yoxdur)
 
-The bot responds when you mention it or reply to its messages:
+**Üsul 2: Botun mesajına cavab verin**
 
-**Method 1: Mention the bot**
 ```
-@your_bot_username What's our transaction volume trend?
-```
-**Important:**
-- Replace `@your_bot_username` with your actual bot's username (the one you set in BotFather)
-- Mention detection is case-insensitive - `@MyBot` and `@mybot` both work
-- To find your bot's username: Check the bot's profile in Telegram or look for the username in BotFather
-
-**Method 2: Reply to bot's message**
-```
-Bot: [Shows business snapshot]
-Executive: [Replies] Break down the revenue sources
-Bot: [Provides detailed revenue analysis]
+Bot: [Biznes xülasəsini göstərir]
+İcraçı: [Cavab verir] Gəlir mənbələrini detalizə et
+Bot: [Ətraflı gəlir təhlili təqdim edir]
 ```
 
-**Method 3: Use /ask command**
+**Üsul 3: /ask əmrindən istifadə edin**
+
 ```
-/ask What customer segments are most profitable?
+/ask Hansı müştəri seqmentləri ən gəlirlidir?
 ```
 
-**Note:** Analytics are shared with the group, but each executive has private AI conversation history.
+### 📊 İdarəetmə Panelindən İstifadə
 
-### 📊 Using the Executive Dashboard
+#### Panelə Daxil Olun
 
-#### Access the Dashboard
 ```
 /analytics
 ```
 
-This opens an interactive menu with these intelligence options:
+Bu, bu informasiya variantları ilə interaktiv menyu açır:
 
-1. **📊 Business Snapshot** - Monthly performance overview
-   - Revenue vs operating costs
-   - Net position with strategic assessment
-   - Transaction volume metrics
+1. **📊 Biznes Xülasəsi** - Aylıq performans icmalı
+2. **💼 Portfel İcmalı** - İdarə olunan aktivlər
+3. **💸 Xərc Analizi** - Pul harada xərclənir
+4. **📈 Əməliyyat Nümunələri** - 90 günlük əməliyyat axını
+5. **🎯 Yüksək Dəyərli Əməliyyatlar** - Məbləğə görə ilk 10
+6. **📉 Portfel Trendi** - 90 günlük aktiv trayektoriyası
 
-2. **💼 Portfolio Overview** - Assets under management
-   - Total portfolio value
-   - Account breakdown by type
-   - Customer distribution
+#### Sürətli Əmrlər
 
-3. **💸 Expenditure Analysis** - Where money flows out
-   - Visual pie chart of spending categories
-   - Percentage breakdown
-   - Top cost centers
-
-4. **📈 Transaction Patterns** - 90-day operational trends
-   - Transaction flow over time
-   - Type-based analysis
-   - Seasonal patterns
-
-5. **🎯 High-Value Transactions** - Top 10 by amount
-   - Visual chart ranking
-   - Transaction details
-   - Type classification (revenue vs expense)
-
-6. **📉 Portfolio Trend** - 90-day asset trajectory
-   - Daily balance evolution
-   - Growth/decline patterns
-   - Performance tracking
-
-#### Quick Commands
-
-Skip the menu and get insights directly:
+Menyunu keç və birbaşa fikirlər əldə et:
 
 ```
-/summary   - Instant business performance snapshot
-/balance   - Portfolio overview
-/spending  - Expenditure analysis with charts
-/trends    - Transaction pattern analysis
-/top       - High-value transaction review
+/summary   - Ani biznes performans xülasəsi
+/balance   - Portfel icmalı
+/spending  - Qrafiklərlə xərc analizi
+/trends    - Əməliyyat nümunə analizi
+/top       - Yüksək dəyərli əməliyyat nəzərdən keçirilməsi
 ```
 
-### 💡 Strategic Question Examples
+### 💡 Strateji Sual Nümunələri
 
-**Growth & Revenue:**
-- "What revenue opportunities exist in our current data?"
-- "How can we increase profitability?"
-- "Which customer segments should we focus on?"
-- "What's our customer acquisition trend?"
+**Böyümə və Gəlir:**
 
-**Risk Management:**
-- "Analyze our portfolio risk exposure"
-- "What are our default indicators?"
-- "Show me concerning transaction patterns"
-- "Evaluate loan portfolio health"
+- "Cari məlumatlarımızda hansı gəlir imkanları mövcuddur?"
+- "Gəlirlilik necə artırıla bilər?"
+- "Hansı müştəri seqmentlərinə fokuslanmalıyıq?"
 
-**Operational Efficiency:**
-- "Where can we reduce costs without impacting service?"
-- "What's our operational efficiency trend?"
-- "Are we optimizing fee structures?"
-- "Compare revenue vs expenses trend"
+**Risk İdarəetməsi:**
 
-**Market Intelligence:**
-- "What do transaction patterns tell us about customer behavior?"
-- "Identify seasonal trends in our operations"
-- "What's our competitive positioning based on these metrics?"
-- "Forecast next quarter based on current trends"
+- "Portfel risk məruzumuz necədir?"
+- "Defolt göstəricilərimiz nələrdir?"
+- "Kredit portfeli sağlamlığını qiymətləndir"
 
-### 🔄 Managing Conversations
+**Əməliyyat Səmərəliliyi:**
 
-**Clear conversation history:**
+- "Xidmətə təsir etmədən xərcləri haradan azalda bilərik?"
+- "Əməliyyat səmərəlilik trendimiz necədir?"
+
+### 🔄 Danışıqların İdarəsi
+
+**Danışıq tarixini təmizləyin:**
+
 ```
 /clear
 ```
-This resets the AI's memory of your conversation, useful when switching topics.
 
-**Get your Executive ID:**
+**İcraçi ID-nizi əldə edin:**
+
 ```
 /myid
 ```
-Shows your unique identifier for system administration.
 
-**View all capabilities:**
+**Bütün imkanları görün:**
+
 ```
 /help
 ```
 
-## Bot Commands Reference
+## Bot Əmrlər Arayışı
 
-### 🎯 Executive Commands
-- `/start` - Welcome brief and bot introduction
-- `/help` - Complete command reference and capabilities
-- `/myid` - Display your Executive ID for system access
+### 🎯 İcraçı Əmrləri
 
-### 📊 Strategic Intelligence Commands
-- `/analytics` - Interactive executive dashboard with all metrics
-- `/summary` - Instant business performance snapshot (revenue, costs, net position)
-- `/balance` - Portfolio overview (assets under management, account breakdown)
-- `/spending` - Expenditure analysis with visual charts and percentages
-- `/trends` - Transaction pattern analysis (90-day operational flow)
-- `/top` - High-value transaction review (top 10 by amount)
+- `/start` - Xoş gəlmisiniz brifinqi və bot təqdimatı
+- `/help` - Tam əmr arayışı və imkanlar
+- `/myid` - Sistem girişi üçün İcraçi ID-nizi göstərin
 
-### 💼 AI Advisor Commands
-- `/chat` - Activate AI business advisor mode
-- `/ask [question]` - Direct strategic inquiry (e.g., `/ask What are our growth opportunities?`)
-- `/clear` - Reset conversation context
+### 📊 Strateji İnformasiya Əmrləri
 
-## Real-World Use Cases
+- `/analytics` - Bütün göstəricilərlə interaktiv idarəetmə paneli
+- `/summary` - Ani biznes performans xülasəsi
+- `/balance` - Portfel icmalı (idarə olunan aktivlər, hesab bölgüsü)
+- `/spending` - Vizual qrafik və faizlərlə xərc analizi
+- `/trends` - Əməliyyat nümunə analizi (90 günlük axın)
+- `/top` - Yüksək dəyərli əməliyyat nəzərdən keçirilməsi (məbləğə görə ilk 10)
 
-### 📱 CEO on the Go
-**Scenario:** CEO traveling to board meeting needs quick portfolio update
+### 💼 Sİ Məsləhətçi Əmrləri
 
-```
-CEO: /summary
-Bot: [Delivers business snapshot in 30 seconds]
+- `/chat` - Sİ biznes məsləhətçi rejimini aktivləşdirin
+- `/ask [sual]` - Birbaşa strateji sorğu (məs: `/ask Bizim böyümə imkanlarımız nələrdir?`)
+- `/clear` - Danışıq kontekstini sıfırlayın
 
-CEO: What should I highlight to the board?
-Bot: Focus on three key strengths:
-1. Strong net position of $11.2K (up 15% from last period)
-2. Portfolio growth to $487K across diversified accounts
-3. Zero default indicators in loan portfolio
+## Real Həyat İstifadə Halları
 
-Opportunity area to address: Loan portfolio at only 25% of capacity
-suggests untapped lending revenue potential.
-```
+### 📱 Yoldakı Direktor
 
-### 👥 Executive Team Strategy Session
-**Scenario:** Leadership team discussing Q4 strategy in group chat
+**Ssenari:** Direktor idarə heyəti iclasına gedərkən sürətli portfel yeniləməsi lazımdır
 
 ```
-CFO: @your_bot_username Show expenditure breakdown
-Bot: [Sends chart and analysis showing 87.7% in loan servicing]
+Direktor: /summary
+Bot: [30 saniyədə biznes xülasəsi çatdırır]
 
-CEO: [Replies to bot] How does this compare to revenue?
-Bot: Current revenue covers loan servicing with 35% margin for operations.
-This is healthy but below industry standard of 45-50%. Consider...
+Direktor: İdarə heyətinə nə vurğulamalıyam?
+Bot: Üç əsas güclü tərəfə fokuslanın:
+1. $11.2K güclü xalis mövqe (əvvəlki dövrdən 15% artım)
+2. Diversifikasiya olunmuş hesablarda $487K portfel artımı
+3. Kredit portfelində sıfır defolt göstəriciləri
 
-COO: @your_bot_username What operational efficiencies can improve margins?
-Bot: [Provides detailed efficiency analysis]
+Ünvanlama imkanı: Yalnız 25% tutumda kredit portfeli
+istifadə olunmamış kredit gəlir potensialını göstərir.
 ```
 
-### 📈 Quick Decision Support
-**Scenario:** CFO needs risk assessment before approving new loans
+### 👥 İcraçı Komanda Strategiya Sessiyası
+
+**Ssenari:** Rəhbərlik komandası qrup söhbətində 4-cü rüb strategiyasını müzakirə edir
 
 ```
-CFO: Analyze our current loan portfolio risk
-Bot: [Delivers comprehensive risk analysis with payment patterns,
-concentration metrics, and strategic recommendations]
+Maliyyə direktoru: @sizin_bot_username Xərc bölgüsünü göstər
+Bot: [87.7% kredit xidmətində qrafik və təhlil göndərir]
 
-CFO: What's our capacity for additional loans?
-Bot: Based on current portfolio health (100% payment consistency) and
-capital position, you have capacity for $350K-$400K in additional
-lending without exceeding prudent risk thresholds.
+Direktor: [Bota cavab verir] Bu gəlirlə necə müqayisə olunur?
+Bot: Cari gəlir əməliyyatlar üçün 35% marja ilə kredit xidmətini
+əhatə edir. Bu sağlamdır, lakin sənaye standartı olan 45-50%-dən
+aşağıdır. Nəzərdən keçirin...
+
+Əməliyyat direktoru: @sizin_bot_username Marjları hansı əməliyyat
+səmərəliliyiləri artıra bilər?
+Bot: [Ətraflı səmərəlilik təhlili təqdim edir]
 ```
 
-### 🎯 Performance Monitoring
-**Scenario:** Daily check on business metrics during coffee
+## API Açarları Əldə Etmək
 
+### Telegram Bot Tokeni
+
+1. Telegram-da `@BotFather` axtarın
+2. `/newbot` göndərin və təlimatlara əməl edin
+3. Verilən tokeni kopyalayın
+
+### Gemini API Açarı
+
+1. https://makersuite.google.com/app/apikey ünvanına daxil olun
+2. Yeni API açarı yaradın
+3. Açarı kopyalayın
+
+## Problemlərin Həlli
+
+### Məlumat Bazası Bağlantı Problemləri
+
+```bash
+# Bağlantını əl ilə test edin
+python -c "from database import get_session; print('Bağlandı!' if get_session() else 'Uğursuz')"
 ```
-Executive: Good morning, show me yesterday's highlights
-Bot: [Delivers key metrics from previous day's activity]
 
-Executive: Any concerning patterns?
-Bot: [AI analyzes recent trends and flags any anomalies]
+### Bot Başlamır
+
+- `.env` faylının mövcudluğunu və bütün tələb olunan dəyişənlərin olduğunu yoxlayın
+- Telegram tokeninin düzgün olduğunu yoxlayın
+- Məlumat bazasının əlçatan olduğunu yoxlayın
+- Problemləri diaqnoz etmək üçün `python test_bot.py` işə salın
+
+### Gemini API Xətaları
+
+- API açarının etibarlı olduğunu yoxlayın
+- https://makersuite.google.com ünvanında kvota limitlərini yoxlayın
+- İnternet bağlantısını təmin edin
+
+## Docker Əmrləri
+
+```bash
+# Logları görün
+docker-compose logs -f
+
+# Botu dayandırın
+docker-compose down
+
+# Botu yenidən başladın
+docker-compose restart
+
+# Yenidən qur və başlat
+docker-compose up -d --build
 ```
 
-## Project Structure
+## Layihə Strukturu
 
 ```
 analyst_in_pocket/
-├── bot.py                   # Main bot application
-├── config.py                # Configuration management
-├── requirements.txt         # Python dependencies
-├── test_bot.py             # Test script
-├── deploy.sh               # Docker deployment script
-├── Dockerfile              # Docker image definition
-├── docker-compose.yml      # Docker Compose configuration
+├── bot.py                   # Əsas bot tətbiqi
+├── config.py                # Konfiqurasiya idarəetməsi
+├── requirements.txt         # Python asılılıqları
+├── deploy.sh               # Docker yerləşdirmə skripti
+├── Dockerfile              # Docker image təyini
+├── docker-compose.yml      # Docker Compose konfiqurasiyası
 │
-├── database/               # Database layer
-│   ├── connection.py       # Database connection handler
-│   ├── models.py           # SQLAlchemy models
-│   └── DEMO_BANK_DOCUMENTATION.md  # Schema documentation
+├── database/               # Məlumat bazası layı
+│   ├── connection.py       # Məlumat bazası bağlantı idarəedici
+│   ├── models.py           # SQLAlchemy modelləri
+│   └── DEMO_BANK_DOCUMENTATION.md
 │
-├── analytics/              # Analytics engine
-│   ├── insights.py         # Analytics insights generation
-│   └── charts.py           # Chart generation
+├── analytics/              # Analitik mühərrik
+│   ├── insights.py         # Analitik fikirlər yaradıcısı
+│   └── charts.py           # Qrafik yaradıcı
 │
-└── chatbot/                # AI chatbot
-    └── gemini_client.py    # Gemini API integration
+└── chatbot/                # Sİ çatbot
+    └── gemini_client.py    # Gemini API inteqrasiyası
 ```
 
-## Strategic Intelligence Available
+## Nə Üçün Cibinizdə Analitik?
 
-### 1. 💼 Business Performance Dashboard
-**What it shows:**
-- Revenue (deposits, transfers in, loan disbursements, interest credits, refunds)
-- Operating Expenses (withdrawals, transfers out, loan payments, fees)
-- Net Position (positive = growth, negative = optimization opportunity)
-- Transaction Volume (operational activity indicator)
+### 💎 Dəyər Təklifi
 
-**Strategic Value:** Understand overall business health and cash flow position at a glance
+**Bank Direktorları Üçün:**
 
-### 2. 🏦 Portfolio Intelligence
-**What it shows:**
-- Total Assets Under Management across all customer accounts
-- Account distribution by type (checking, savings, business, investment)
-- Individual account performance breakdown
-- Customer portfolio composition
+- **Ani İnformasiya** - Saatlar əvəzinə saniyələrdə strateji fikirlər
+- **Həmişə Əlçatan** - Sİ məsləhətçiniz 24/7 işləyir, harada olursunuzsa olun
+- **Texniki Maneə Yox** - Biznes dili, İT jarqonu yox
+- **Məlumata Əsaslanan Etibarlılıq** - Real məlumatlarla dəstəklənən qərarlar verin
+- **Xərc Səmərəli** - Tam zamanlı analitik işə götürməyin xərcinin bir hissəsi
 
-**Strategic Value:** Monitor total capital position and portfolio diversification
+**Biznes Təsiri:**
 
-### 3. 💸 Expenditure Intelligence
-**What it shows:**
-- Operating cost breakdown by category
-- Visual pie chart for quick pattern recognition
-- Percentage distribution showing where money flows
-- Top cost centers requiring attention
+- ⏱️ **Həftədə 10+ saat qənaət edin** məlumat təhlili və hesabatda
+- 📊 **Daha sürətli qərarlar verin** fikirlərə ani girişlə
+- 💰 **Gəlir imkanlarını müəyyən edin** məlumatlarınızda gizlənmiş
+- 🎯 **Riski azaldın** davamlı portfel monitorinqi ilə
+- 📈 **Marjları artırın** məlumata əsaslanan optimallaşdırma vasitəsilə
 
-**Strategic Value:** Identify cost optimization opportunities and spending patterns
+## Lisenziya
 
-### 4. 📈 Transaction Pattern Analysis
-**What it shows:**
-- 90-day transaction flow trends
-- Revenue vs expense patterns over time
-- Type-based transaction analysis
-- Seasonal and cyclical patterns
+Bu layihə təhsil və şəxsi istifadə üçün olduğu kimi təqdim olunur.
 
-**Strategic Value:** Predict future performance and identify operational trends
+## Dəstək
 
-### 5. 📊 Portfolio Performance Tracking
-**What it shows:**
-- Daily balance evolution over 90 days
-- Growth trajectory visualization
-- Peak and trough identification
-- Performance momentum indicators
+Problemlər üçün:
 
-**Strategic Value:** Monitor capital growth and identify inflection points
-
-### 6. 🎯 High-Value Transaction Intelligence
-**What it shows:**
-- Top 10 largest transactions by amount
-- Transaction type classification (revenue/expense)
-- Detailed descriptions and dates
-- Visual ranking chart
-
-**Strategic Value:** Monitor significant capital movements and major business events
-
-## Testing
-
-Run the test script to verify everything is configured correctly:
-
-```bash
-python test_bot.py
-```
-
-The test checks:
-- Configuration validation
-- Database connectivity
-- Analytics engine
-- Chart generator
-- Gemini chatbot
-- Bot imports
-
-## Development
-
-### Adding New Analytics
-
-1. Add method to `analytics/insights.py`:
-```python
-@staticmethod
-def get_new_insight(days: int = 30) -> Dict[str, Any]:
-    with get_session() as session:
-        # Query database
-        results = session.query(Transaction).filter(...).all()
-        return {'data': results}
-```
-
-2. Add chart in `analytics/charts.py`:
-```python
-def create_new_chart(self, data: Dict) -> io.BytesIO:
-    fig, ax = plt.subplots()
-    # Create visualization
-    return self._save_plot_to_bytes()
-```
-
-3. Add command handler in `bot.py`:
-```python
-async def new_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    data = AnalyticsEngine.get_new_insight()
-    chart = chart_generator.create_new_chart(data)
-    await update.message.reply_photo(photo=chart)
-```
-
-### Customizing AI Behavior
-
-The AI advisor's communication style and expertise can be customized by editing the `system_prompt` in `chatbot/gemini_client.py:21-39`.
-
-**Current configuration:**
-- Executive-level strategic communication
-- Focus on business impact over technical details
-- Data-driven recommendations with actionable insights
-- Professional, confident tone suitable for C-suite
-
-**To customize:**
-```python
-self.system_prompt = """Your custom advisor personality here..."""
-```
-
-**Example customizations:**
-- Adjust formality level
-- Add industry-specific expertise
-- Change focus areas (risk vs growth vs efficiency)
-- Modify recommendation style
-
-## Troubleshooting
-
-### Database Connection Issues
-```bash
-# Test connection manually
-python -c "from database import get_session; print('Connected!' if get_session() else 'Failed')"
-```
-
-### Bot Not Starting
-- Check `.env` file exists and has all required variables
-- Verify Telegram token is correct
-- Check database is accessible
-- Run `python test_bot.py` to diagnose issues
-
-### Gemini API Errors
-- Verify API key is valid
-- Check quota limits at https://makersuite.google.com
-- Ensure internet connectivity
-
-### Docker Issues
-```bash
-# View detailed logs
-docker-compose logs --tail=100 bot
-
-# Check container status
-docker-compose ps
-
-# Restart with fresh build
-docker-compose down && docker-compose up -d --build
-```
-
-## Security Best Practices
-
-- Never commit `.env` file to version control
-- Keep API keys secure and rotate regularly
-- Use environment variables for all sensitive data
-- Restrict admin commands to authorized users only
-- Review chat history permissions
-
-## Performance Tips
-
-- The bot creates charts on-demand; larger datasets may take longer
-- Chat history is stored in database; clear periodically if needed
-- Database queries are optimized with indexes (see schema documentation)
-- Docker deployment includes automatic restart on failure
-
-## Deployment Options
-
-### Option 1: Docker (Recommended)
-```bash
-./deploy.sh
-```
-
-### Option 2: Docker Compose
-```bash
-docker-compose up -d
-```
-
-### Option 3: Systemd Service (Linux)
-```bash
-# Create service file
-sudo nano /etc/systemd/system/analyst-bot.service
-
-# Enable and start
-sudo systemctl enable analyst-bot
-sudo systemctl start analyst-bot
-```
-
-### Option 4: Manual
-```bash
-python bot.py
-```
-
-## Monitoring
-
-### View Logs
-```bash
-# Docker
-docker-compose logs -f
-
-# Manual
-# Logs are printed to stdout
-```
-
-### Health Check
-```bash
-# Check if bot is responding
-# Send /start command to bot in Telegram
-```
-
-## Contributing
-
-To add features:
-1. Create new branch
-2. Add feature in appropriate module
-3. Test with `python test_bot.py`
-4. Update documentation
-5. Submit pull request
-
-## License
-
-This project is provided as-is for educational and personal use.
-
-## Support
-
-For issues:
-1. Run `python test_bot.py` to diagnose
-2. Check logs for error messages
-3. Verify all environment variables are set
-4. Consult `database/DEMO_BANK_DOCUMENTATION.md` for schema details
-
-## Strategic Roadmap
-
-### 🚀 Coming Soon
-
-**Enhanced Predictive Analytics**
-- ML-powered revenue forecasting
-- Risk prediction models
-- Customer behavior predictions
-- Market trend analysis
-
-**Executive Reporting**
-- Scheduled automated reports (daily/weekly/monthly)
-- Custom KPI dashboards
-- Board presentation exports (PDF/PowerPoint)
-- Excel/CSV data exports for deeper analysis
-
-**Advanced Intelligence**
-- Competitor benchmarking
-- Multi-bank portfolio management
-- Real-time alerts for critical metrics
-- Custom threshold notifications
-
-**Enterprise Features**
-- Role-based access control
-- Multi-language support for global operations
-- White-label deployment options
-- Integration with other banking systems
-
-**Enhanced Visualizations**
-- Interactive drill-down charts
-- Comparison views (YoY, MoM)
-- Customizable dashboard layouts
-- Real-time metric streaming
-
-## Why Choose Analyst in Pocket?
-
-### 💎 Value Proposition
-
-**For Bank CEOs:**
-- **Instant Intelligence** - Strategic insights in seconds, not hours
-- **Always Available** - Your AI advisor works 24/7, wherever you are
-- **No Technical Barrier** - Business language, not IT jargon
-- **Data-Driven Confidence** - Make decisions backed by real data
-- **Cost Efficient** - Fraction of the cost of hiring a full-time analyst
-
-**Business Impact:**
-- ⏱️ **Save 10+ hours/week** on data analysis and reporting
-- 📊 **Make faster decisions** with instant access to insights
-- 💰 **Identify revenue opportunities** hidden in your data
-- 🎯 **Reduce risk** with continuous portfolio monitoring
-- 📈 **Improve margins** through data-driven optimization
-
-**Technical Excellence:**
-- 🔒 **Secure** - Private conversations, encrypted connections
-- ⚡ **Fast** - Sub-second response times for most queries
-- 🎨 **Professional** - Executive-quality charts and reports
-- 🔄 **Real-time** - Always synced with your latest data
-- 📱 **Mobile-First** - Designed for executives on the move
-
-### 🎯 Perfect For
-
-- Bank CEOs and C-Suite Executives
-- Financial Institution Leadership Teams
-- Board Members requiring quick insights
-- CFOs and Financial Controllers
-- Risk Management Officers
-- Operations Directors
-
-### 💼 Use It For
-
-- Board meeting preparation
-- Daily performance monitoring
-- Strategic planning sessions
-- Risk assessment reviews
-- Investor presentations
-- Quarterly business reviews
-- Ad-hoc analysis requests
+1. Diaqnoz etmək üçün `python test_bot.py` işə salın
+2. Xəta mesajları üçün logları yoxlayın
+3. Bütün mühit dəyişənlərinin təyin edildiyini yoxlayın

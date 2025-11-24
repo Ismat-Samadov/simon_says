@@ -114,40 +114,40 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Different message for groups vs private chats
     if chat.type in ['group', 'supergroup']:
         welcome_message = f"""
-💼 **Your AI Business Intelligence Advisor is Online**
+💼 **Süni İntellekt Biznes Məsləhətçiniz Aktiv**
 
-I deliver real-time strategic insights on your bank's operations - anytime, anywhere.
+Bankınızın əməliyyatları haqqında real vaxt rejimində strateji fikirlər təqdim edirəm - istənilən vaxt, istənilən yerdə.
 
-**What I Provide:**
-📊 **Executive Dashboard** - Key metrics at your fingertips
-💡 **Strategic Insights** - Ask me anything about your business
-🎯 **Data-Driven Decisions** - Turn data into action
+**Təqdim etdiklərim:**
+📊 **İdarəetmə Paneli** - Əsas göstəricilər əlinizdə
+💡 **Strateji Fikirlər** - Biznesiniz haqqında hər şeyi soruşun
+🎯 **Məlumata Əsaslanan Qərarlar** - Məlumatı hərəkətə çevirin
 
-**Quick Access:**
-/analytics - Executive dashboard
-/summary - Business snapshot
-/help - All capabilities
+**Sürətli Keçid:**
+/analytics - İdarəetmə paneli
+/summary - Biznes xülasəsi
+/help - Bütün imkanlar
 
-Transform conversations into strategic advantage. Just mention me or ask a question.
+Danışıqları strateji üstünlüyə çevirin. Sadəcə məni qeyd edin və ya sual verin.
 """
     else:
         welcome_message = f"""
-💼 **Welcome, {user.first_name}**
+💼 **Xoş gəlmisiniz, {user.first_name}**
 
-Your AI Business Intelligence Advisor - delivering strategic insights on demand.
+Süni İntellekt Biznes Məsləhətçiniz - tələb olunan anda strateji fikirlər təqdim edir.
 
-**Strategic Intelligence at Your Command:**
-📊 **Executive Dashboard** - Real-time business metrics
-💡 **AI Advisor** - Ask strategic questions, get data-driven answers
-🎯 **Instant Insights** - From customer trends to revenue opportunities
+**Sizin Əmrinizdə Strateji İnformasiya:**
+📊 **İdarəetmə Paneli** - Real vaxt biznes göstəriciləri
+💡 **Sİ Məsləhətçi** - Strateji suallar verin, məlumata əsaslanan cavablar alın
+🎯 **Ani Fikirlər** - Müştəri trendlərindən gəlir imkanlarına qədər
 
-**Get Started:**
-/analytics - View executive dashboard
-/summary - Business performance snapshot
-/chat - Activate AI advisor
-/help - Explore all capabilities
+**Başlayın:**
+/analytics - İdarəetmə panelini görün
+/summary - Biznes performans xülasəsi
+/chat - Sİ məsləhətçini aktivləşdirin
+/help - Bütün imkanları araşdırın
 
-*Your trusted advisor in your pocket. Ask me anything about your bank's performance.*
+*Cibinizdə etibarlı məsləhətçi. Bankınızın performansı haqqında mənə hər şeyi soruşun.*
 """
 
     await update.message.reply_text(welcome_message)
@@ -160,55 +160,55 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if chat.type in ['group', 'supergroup']:
         help_text = f"""
-💼 **Executive Command Center**
+💼 **İdarəetmə Komanda Mərkəzi**
 
-**Strategic Intelligence:**
-/analytics - Executive dashboard with interactive metrics
-/summary - Business performance snapshot
-/balance - Portfolio overview
-/spending - Expenditure analysis
-/trends - Market & transaction patterns
-/top - Highest-value transactions
+**Strateji İnformasiya:**
+/analytics - İnteraktiv göstəricilərlə idarəetmə paneli
+/summary - Biznes performans xülasəsi
+/balance - Portfel icmalı
+/spending - Xərc analizi
+/trends - Bazar və əməliyyat nümunələri
+/top - Ən yüksək dəyərli əməliyyatlar
 
-**AI Advisory Access:**
-- Mention me: @{bot_username} [your strategic question]
-- Reply to my insights for deeper analysis
-- /ask [question] - Direct inquiry
+**Sİ Məsləhət Girişi:**
+- Məni qeyd edin: @{bot_username} [strateji sualınız]
+- Daha dərin təhlil üçün mənim fikirlərimə cavab verin
+- /ask [sual] - Birbaşa sorğu
 
-**System:**
-/start - Welcome brief
-/help - Command reference
-/myid - Your executive ID
+**Sistem:**
+/start - Xoş gəlmisiniz brifinqi
+/help - Əmr arayışı
+/myid - İdarəçi ID-niz
 
-**Intelligence Note:**
-All metrics reflect real-time bank operations. AI conversations are private to each executive.
+**İnformasiya Qeydi:**
+Bütün göstəricilər real vaxt bank əməliyyatlarını əks etdirir. Sİ danışıqları hər icraçı üçün şəxsidir.
 """
     else:
         help_text = """
-💼 **Executive Command Center**
+💼 **İdarəetmə Komanda Mərkəzi**
 
-**Strategic Dashboard:**
-/analytics - Interactive executive dashboard
-/summary - Business performance snapshot
-/balance - Portfolio overview
-/spending - Expenditure analysis by category
-/trends - Transaction & market patterns
-/top - High-value transaction review
+**Strateji Panel:**
+/analytics - İnteraktiv idarəetmə paneli
+/summary - Biznes performans xülasəsi
+/balance - Portfel icmalı
+/spending - Kateqoriya üzrə xərc analizi
+/trends - Əməliyyat və bazar nümunələri
+/top - Yüksək dəyərli əməliyyatların nəzərdən keçirilməsi
 
-**AI Business Advisor:**
-/chat - Activate AI advisory mode
-/clear - Reset conversation context
-/ask [question] - Direct strategic inquiry
+**Sİ Biznes Məsləhətçisi:**
+/chat - Sİ məsləhət rejimini aktivləşdirin
+/clear - Danışıq kontekstini sıfırlayın
+/ask [sual] - Birbaşa strateji sorğu
 
-**System:**
-/start - Welcome brief
-/help - Command reference
-/myid - Your executive ID
+**Sistem:**
+/start - Xoş gəlmisiniz brifinqi
+/help - Əmr arayışı
+/myid - İdarəçi ID-niz
 
-**How to Use:**
-Simply message me any strategic question about your bank's performance. I analyze the data and deliver actionable insights instantly.
+**Necə İstifadə Etmək Olar:**
+Sadəcə bankınızın performansı haqqında hər hansı strateji sual göndərin. Mən məlumatları təhlil edib dərhal tətbiq oluna bilən fikirlər çatdırıram.
 
-*Example: "What are our growth opportunities?" or "Analyze loan portfolio risk"*
+*Nümunə: "Bizim böyümə imkanlarımız nələrdir?" və ya "Kredit portfel riskini təhlil et"*
 """
 
     await update.message.reply_text(help_text)
@@ -220,25 +220,25 @@ async def analytics_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     keyboard = [
         [
-            InlineKeyboardButton("📊 Business Snapshot", callback_data='analytics_summary'),
-            InlineKeyboardButton("💼 Portfolio Overview", callback_data='analytics_balance')
+            InlineKeyboardButton("📊 Biznes Xülasəsi", callback_data='analytics_summary'),
+            InlineKeyboardButton("💼 Portfel İcmalı", callback_data='analytics_balance')
         ],
         [
-            InlineKeyboardButton("💸 Expenditure Analysis", callback_data='analytics_spending'),
-            InlineKeyboardButton("📈 Transaction Patterns", callback_data='analytics_trends')
+            InlineKeyboardButton("💸 Xərc Analizi", callback_data='analytics_spending'),
+            InlineKeyboardButton("📈 Əməliyyat Nümunələri", callback_data='analytics_trends')
         ],
         [
-            InlineKeyboardButton("🎯 High-Value Transactions", callback_data='analytics_top'),
-            InlineKeyboardButton("📉 Portfolio Trend", callback_data='analytics_balance_trend')
+            InlineKeyboardButton("🎯 Yüksək Dəyərli Əməliyyatlar", callback_data='analytics_top'),
+            InlineKeyboardButton("📉 Portfel Trendi", callback_data='analytics_balance_trend')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    message_text = "💼 **Executive Dashboard**\n\nSelect strategic intelligence:"
+    message_text = "💼 **İdarəetmə Paneli**\n\nStrateji informasiya seçin:"
 
     # Add note for groups
     if chat.type in ['group', 'supergroup']:
-        message_text += "\n\n_Real-time operational metrics for executive decision-making._"
+        message_text += "\n\n_İdarəçi qərarqəbul etmə üçün real vaxt əməliyyat göstəriciləri._"
 
     await update.message.reply_text(
         message_text,
@@ -356,15 +356,15 @@ async def summary_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def chat_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Start chat mode."""
     await update.message.reply_text(
-        "💼 **AI Business Advisor Activated**\n\n"
-        "Ask me anything about your bank's performance:\n\n"
-        "• Revenue opportunities and growth strategies\n"
-        "• Risk assessment and portfolio analysis\n"
-        "• Customer behavior and transaction patterns\n"
-        "• Operational efficiency insights\n"
-        "• Market trends and competitive positioning\n\n"
-        "*I transform your data into strategic intelligence.*\n\n"
-        "Use /clear to reset conversation context."
+        "💼 **Sİ Biznes Məsləhətçi Aktivləşdirildi**\n\n"
+        "Bankınızın performansı haqqında mənə hər şeyi soruşun:\n\n"
+        "• Gəlir imkanları və böyümə strategiyaları\n"
+        "• Risk qiymətləndirməsi və portfel analizi\n"
+        "• Müştəri davranışı və əməliyyat nümunələri\n"
+        "• Əməliyyat səmərəliliyi haqqında fikirlər\n"
+        "• Bazar trendləri və rəqabət mövqeyi\n\n"
+        "*Mən sizin məlumatlarınızı strateji informasiyaya çevirirəm.*\n\n"
+        "Danışıq kontekstini sıfırlamaq üçün /clear istifadə edin."
     )
 
 
@@ -403,7 +403,7 @@ async def clear_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Clear chat history."""
     user_id = update.effective_user.id
     chatbot.clear_history(user_id)
-    await update.message.reply_text("✅ Chat history cleared!")
+    await update.message.reply_text("✅ Söhbət tarixçəsi təmizləndi!")
 
 
 async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
