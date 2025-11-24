@@ -197,28 +197,34 @@ class AnalyticsEngine:
 
     @staticmethod
     def get_insights_text() -> str:
-        """Generate a text-based insights summary."""
+        """Generate executive-level insights summary."""
         summary = AnalyticsEngine.get_monthly_summary()
         account_summary = AnalyticsEngine.get_account_summary()
         spending = AnalyticsEngine.get_spending_by_type()
 
+        net_status = "Strong positive position" if summary['net'] >= 0 else "Optimization opportunity identified"
+        net_emoji = "📈" if summary['net'] >= 0 else "📉"
+
         text = f"""
-📊 **Financial Insights Summary**
+💼 **Executive Business Intelligence**
 
-**This Month ({summary['month']})**
-💰 Total Income: ${summary['total_income']:,.2f}
-💸 Total Expenses: ${summary['total_expenses']:,.2f}
-📈 Net: ${summary['net']:,.2f}
-🔢 Transactions: {summary['transaction_count']}
+**Current Period: {summary['month']}**
+💰 Revenue: ${summary['total_income']:,.2f}
+💸 Operating Costs: ${summary['total_expenses']:,.2f}
+{net_emoji} Net Position: ${summary['net']:,.2f}
+📊 Transaction Volume: {summary['transaction_count']}
+*{net_status}*
 
-**Account Overview**
-🏦 Total Balance: ${account_summary['total_balance']:,.2f}
-📋 Active Accounts: {account_summary['account_count']}
+**Portfolio Metrics**
+🏦 Assets Under Management: ${account_summary['total_balance']:,.2f}
+📋 Active Customer Accounts: {account_summary['account_count']}
 
-**Top Spending by Type**
+**Major Expenditure Categories**
 """
+        total_spending = sum(spending.values())
         for i, (trans_type, amount) in enumerate(sorted(spending.items(), key=lambda x: x[1], reverse=True)[:5], 1):
             display_name = trans_type.replace('_', ' ').title()
-            text += f"{i}. {display_name}: ${amount:,.2f}\n"
+            percentage = (amount / total_spending * 100) if total_spending > 0 else 0
+            text += f"{i}. {display_name}: ${amount:,.2f} ({percentage:.1f}%)\n"
 
         return text.strip()

@@ -52,34 +52,40 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Different message for groups vs private chats
     if chat.type in ['group', 'supergroup']:
         welcome_message = f"""
-👋 Hello! I'm your Financial Analyst Bot!
+💼 **Your AI Business Intelligence Advisor is Online**
 
-I can help this group with:
-📊 **Analytics** - Get insights about financial data
-💬 **Chat** - Ask me anything about personal finance
+I deliver real-time strategic insights on your bank's operations - anytime, anywhere.
 
-**Group Commands:**
-/analytics - View financial insights menu
-/summary - Get quick financial summary
-/help - Show all commands
+**What I Provide:**
+📊 **Executive Dashboard** - Key metrics at your fingertips
+💡 **Strategic Insights** - Ask me anything about your business
+🎯 **Data-Driven Decisions** - Turn data into action
 
-**Note:** Analytics are shared with the group. For private AI conversations, DM me!
+**Quick Access:**
+/analytics - Executive dashboard
+/summary - Business snapshot
+/help - All capabilities
+
+Transform conversations into strategic advantage. Just mention me or ask a question.
 """
     else:
         welcome_message = f"""
-👋 Hello {user.first_name}! Welcome to your Financial Analyst Bot!
+💼 **Welcome, {user.first_name}**
 
-I can help you with:
-📊 **Analytics** - Get insights about your financial data
-💬 **Chat** - Ask me anything about personal finance
+Your AI Business Intelligence Advisor - delivering strategic insights on demand.
 
-**Quick Commands:**
-/analytics - View financial insights menu
-/summary - Get quick financial summary
-/chat - Start a conversation with me
-/help - Show all commands
+**Strategic Intelligence at Your Command:**
+📊 **Executive Dashboard** - Real-time business metrics
+💡 **AI Advisor** - Ask strategic questions, get data-driven answers
+🎯 **Instant Insights** - From customer trends to revenue opportunities
 
-You can also just send me a message and I'll respond!
+**Get Started:**
+/analytics - View executive dashboard
+/summary - Business performance snapshot
+/chat - Activate AI advisor
+/help - Explore all capabilities
+
+*Your trusted advisor in your pocket. Ask me anything about your bank's performance.*
 """
 
     await update.message.reply_text(welcome_message)
@@ -92,57 +98,55 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if chat.type in ['group', 'supergroup']:
         help_text = f"""
-🤖 **Financial Analyst Bot - Help**
+💼 **Executive Command Center**
 
-**Analytics Commands:**
-/analytics - Interactive analytics menu
-/summary - Monthly financial summary
-/balance - Account balance overview
-/spending - Spending by category
-/trends - Transaction trends
-/top - Top transactions
+**Strategic Intelligence:**
+/analytics - Executive dashboard with interactive metrics
+/summary - Business performance snapshot
+/balance - Portfolio overview
+/spending - Expenditure analysis
+/trends - Market & transaction patterns
+/top - Highest-value transactions
 
-**Chat in Groups:**
-- Mention me: @{bot_username} your question
-- Reply to my message
-- Use /ask command
+**AI Advisory Access:**
+- Mention me: @{bot_username} [your strategic question]
+- Reply to my insights for deeper analysis
+- /ask [question] - Direct inquiry
 
-**General Commands:**
-/start - Bot introduction
-/help - Show this help message
-/myid - Show your Telegram user ID
+**System:**
+/start - Welcome brief
+/help - Command reference
+/myid - Your executive ID
 
-**Note:**
-- Analytics are shared with the group
-- Chat history is personal (use /clear to reset yours)
-- For private conversations, DM me!
+**Intelligence Note:**
+All metrics reflect real-time bank operations. AI conversations are private to each executive.
 """
     else:
         help_text = """
-🤖 **Financial Analyst Bot - Help**
+💼 **Executive Command Center**
 
-**Analytics Commands:**
-/analytics - Interactive analytics menu
-/summary - Monthly financial summary
-/balance - Account balance overview
-/spending - Spending by category
-/trends - Transaction trends
-/top - Top transactions
+**Strategic Dashboard:**
+/analytics - Interactive executive dashboard
+/summary - Business performance snapshot
+/balance - Portfolio overview
+/spending - Expenditure analysis by category
+/trends - Transaction & market patterns
+/top - High-value transaction review
 
-**Chat Commands:**
-/chat - Start chatting with AI assistant
-/clear - Clear chat history
-/ask [question] - Ask a specific question
+**AI Business Advisor:**
+/chat - Activate AI advisory mode
+/clear - Reset conversation context
+/ask [question] - Direct strategic inquiry
 
-**General Commands:**
-/start - Start the bot
-/help - Show this help message
-/myid - Show your Telegram user ID
+**System:**
+/start - Welcome brief
+/help - Command reference
+/myid - Your executive ID
 
-**How to use:**
-- Use commands for specific analytics
-- Or simply send me a message and I'll respond as your AI assistant
-- Click buttons in analytics menu for visual charts
+**How to Use:**
+Simply message me any strategic question about your bank's performance. I analyze the data and deliver actionable insights instantly.
+
+*Example: "What are our growth opportunities?" or "Analyze loan portfolio risk"*
 """
 
     await update.message.reply_text(help_text)
@@ -154,25 +158,25 @@ async def analytics_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     keyboard = [
         [
-            InlineKeyboardButton("📊 Summary", callback_data='analytics_summary'),
-            InlineKeyboardButton("💰 Balance", callback_data='analytics_balance')
+            InlineKeyboardButton("📊 Business Snapshot", callback_data='analytics_summary'),
+            InlineKeyboardButton("💼 Portfolio Overview", callback_data='analytics_balance')
         ],
         [
-            InlineKeyboardButton("🛒 Spending", callback_data='analytics_spending'),
-            InlineKeyboardButton("📈 Trends", callback_data='analytics_trends')
+            InlineKeyboardButton("💸 Expenditure Analysis", callback_data='analytics_spending'),
+            InlineKeyboardButton("📈 Transaction Patterns", callback_data='analytics_trends')
         ],
         [
-            InlineKeyboardButton("🔝 Top Transactions", callback_data='analytics_top'),
-            InlineKeyboardButton("📉 Balance Trend", callback_data='analytics_balance_trend')
+            InlineKeyboardButton("🎯 High-Value Transactions", callback_data='analytics_top'),
+            InlineKeyboardButton("📉 Portfolio Trend", callback_data='analytics_balance_trend')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    message_text = "📊 **Analytics Dashboard**\n\nChoose what you'd like to see:"
+    message_text = "💼 **Executive Dashboard**\n\nSelect strategic intelligence:"
 
     # Add note for groups
     if chat.type in ['group', 'supergroup']:
-        message_text += "\n\n_Note: Analytics show demo bank data shared with the group._"
+        message_text += "\n\n_Real-time operational metrics for executive decision-making._"
 
     await update.message.reply_text(
         message_text,
@@ -191,28 +195,31 @@ async def handle_analytics_callback(update: Update, context: ContextTypes.DEFAUL
     try:
         if action == 'summary':
             summary = AnalyticsEngine.get_monthly_summary()
+            net_emoji = "📈" if summary['net'] >= 0 else "📉"
             text = f"""
-📊 **Monthly Summary - {summary['month']}**
+💼 **Business Performance - {summary['month']}**
 
-💰 Total Income: ${summary['total_income']:,.2f}
-💸 Total Expenses: ${summary['total_expenses']:,.2f}
-📈 Net: ${summary['net']:,.2f}
-🔢 Transactions: {summary['transaction_count']}
+💰 Revenue: ${summary['total_income']:,.2f}
+💸 Operating Expenses: ${summary['total_expenses']:,.2f}
+{net_emoji} Net Position: ${summary['net']:,.2f}
+📊 Transaction Volume: {summary['transaction_count']}
+
+*Strategic Position: {"Strong positive cashflow" if summary['net'] >= 0 else "Cost optimization opportunity"}*
 """
             await query.edit_message_text(text, parse_mode='Markdown')
 
         elif action == 'balance':
             account_summary = AnalyticsEngine.get_account_summary()
             text = f"""
-💰 **Account Balance Overview**
+💼 **Portfolio Overview**
 
-🏦 Total Balance: ${account_summary['total_balance']:,.2f}
-📋 Active Accounts: {account_summary['account_count']}
+🏦 Total Assets Under Management: ${account_summary['total_balance']:,.2f}
+📋 Active Customer Accounts: {account_summary['account_count']}
 
-**Accounts:**
+**Portfolio Breakdown:**
 """
             for acc in account_summary['accounts']:
-                text += f"\n• {acc['account_number']} ({acc['type']}): ${acc['balance']:,.2f}"
+                text += f"\n• Account {acc['account_number']} | {acc['type'].title()}: ${acc['balance']:,.2f}"
 
             await query.edit_message_text(text, parse_mode='Markdown')
 
@@ -221,15 +228,17 @@ async def handle_analytics_callback(update: Update, context: ContextTypes.DEFAUL
 
             # Send chart
             chart = chart_generator.create_spending_by_category_chart(spending)
-            await query.message.reply_photo(photo=chart, caption="📊 Spending by Type")
+            await query.message.reply_photo(photo=chart, caption="💸 **Expenditure Analysis** - Strategic spending breakdown")
 
             # Also send text summary
-            text = "**Top Spending by Type:**\n\n"
+            text = "**Operating Expenditure Breakdown:**\n\n"
+            total_spending = sum(spending.values())
             for i, (trans_type, amount) in enumerate(
                 sorted(spending.items(), key=lambda x: x[1], reverse=True)[:10], 1
             ):
                 display_name = trans_type.replace('_', ' ').title()
-                text += f"{i}. {display_name}: ${amount:,.2f}\n"
+                percentage = (amount / total_spending * 100) if total_spending > 0 else 0
+                text += f"{i}. {display_name}: ${amount:,.2f} ({percentage:.1f}%)\n"
 
             await query.message.reply_text(text, parse_mode='Markdown')
 
@@ -238,7 +247,7 @@ async def handle_analytics_callback(update: Update, context: ContextTypes.DEFAUL
             chart = chart_generator.create_transaction_trend_chart(df)
             await query.message.reply_photo(
                 photo=chart,
-                caption="📈 Transaction Trends (Last 90 Days)"
+                caption="📈 **Transaction Pattern Analysis** - 90-day operational flow"
             )
 
         elif action == 'balance_trend':
@@ -246,20 +255,20 @@ async def handle_analytics_callback(update: Update, context: ContextTypes.DEFAUL
             chart = chart_generator.create_balance_trend_chart(df)
             await query.message.reply_photo(
                 photo=chart,
-                caption="📉 Balance Trend (Last 90 Days)"
+                caption="📊 **Portfolio Performance Trend** - 90-day asset trajectory"
             )
 
         elif action == 'top':
             transactions = AnalyticsEngine.get_top_transactions(limit=10)
             chart = chart_generator.create_top_transactions_chart(transactions)
-            await query.message.reply_photo(photo=chart, caption="🔝 Top 10 Transactions")
+            await query.message.reply_photo(photo=chart, caption="🎯 **High-Value Transaction Review** - Top 10 by volume")
 
             # Also send text list
-            text = "**Top 10 Transactions:**\n\n"
+            text = "**Strategic Transaction Review:**\n\n"
             for i, t in enumerate(transactions, 1):
-                emoji = "💰" if t['type'] == 'credit' else "💸"
-                text += f"{i}. {emoji} ${t['amount']:,.2f} - {t['category'] or 'N/A'}\n"
-                text += f"   {t['description'] or 'No description'} ({t['date']})\n\n"
+                emoji = "📈" if 'deposit' in t['type'] or 'credit' in t['type'] else "📉"
+                text += f"{i}. {emoji} ${t['amount']:,.2f} | {t['category']}\n"
+                text += f"   {t['description']} | {t['date']}\n\n"
 
             await query.message.reply_text(text, parse_mode='Markdown')
 
@@ -282,13 +291,15 @@ async def summary_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def chat_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Start chat mode."""
     await update.message.reply_text(
-        "💬 Chat mode activated! Send me any message and I'll respond.\n\n"
-        "You can ask me about:\n"
-        "• Personal finance tips\n"
-        "• Understanding your spending\n"
-        "• Financial planning advice\n"
-        "• Or anything else!\n\n"
-        "Use /clear to reset our conversation."
+        "💼 **AI Business Advisor Activated**\n\n"
+        "Ask me anything about your bank's performance:\n\n"
+        "• Revenue opportunities and growth strategies\n"
+        "• Risk assessment and portfolio analysis\n"
+        "• Customer behavior and transaction patterns\n"
+        "• Operational efficiency insights\n"
+        "• Market trends and competitive positioning\n\n"
+        "*I transform your data into strategic intelligence.*\n\n"
+        "Use /clear to reset conversation context."
     )
 
 
@@ -297,26 +308,26 @@ async def my_id_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
 
     info_text = f"""
-🆔 **Your Telegram Information**
+🆔 **Executive Access Credentials**
 
-**User ID:** `{user.id}`
-**Username:** @{user.username if user.username else 'Not set'}
+**Executive ID:** `{user.id}`
+**Username:** @{user.username if user.username else 'Not configured'}
 **Name:** {user.first_name} {user.last_name if user.last_name else ''}
 
-💡 **What is User ID?**
-- Your unique Telegram identifier
-- Used for admin permissions in bots
-- Different from your username
+💼 **About Executive ID:**
+- Your unique secure identifier
+- Required for system administration access
+- Independent of username
 
-📝 **To set as admin:**
-Add this to your .env file:
+⚙️ **Grant System Admin Access:**
+Add your Executive ID to .env configuration:
 ```
 ADMIN_USER_IDS="{user.id}"
 ```
 
-For multiple admins, separate with commas:
+For multiple administrators:
 ```
-ADMIN_USER_IDS="{user.id},123456789"
+ADMIN_USER_IDS="{user.id},123456789,987654321"
 ```
 """
 
