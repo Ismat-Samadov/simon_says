@@ -32,6 +32,7 @@ chart_generator = ChartGenerator()
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handle /start command."""
     user = update.effective_user
+    chat = update.effective_chat
 
     # Save user to database
     with get_session() as session:
@@ -45,7 +46,24 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             session.add(db_user)
 
-    welcome_message = f"""
+    # Different message for groups vs private chats
+    if chat.type in ['group', 'supergroup']:
+        welcome_message = f"""
+👋 Hello! I'm your Financial Analyst Bot!
+
+I can help this group with:
+📊 **Analytics** - Get insights about financial data
+💬 **Chat** - Ask me anything about personal finance
+
+**Group Commands:**
+/analytics - View financial insights menu
+/summary - Get quick financial summary
+/help - Show all commands
+
+**Note:** Analytics are shared with the group. For private AI conversations, DM me!
+"""
+    else:
+        welcome_message = f"""
 👋 Hello {user.first_name}! Welcome to your Financial Analyst Bot!
 
 I can help you with:
@@ -66,7 +84,38 @@ You can also just send me a message and I'll respond!
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handle /help command."""
-    help_text = """
+    chat = update.effective_chat
+    bot_username = context.bot.username or "bot"
+
+    if chat.type in ['group', 'supergroup']:
+        help_text = f"""
+🤖 **Financial Analyst Bot - Help**
+
+**Analytics Commands:**
+/analytics - Interactive analytics menu
+/summary - Monthly financial summary
+/balance - Account balance overview
+/spending - Spending by category
+/trends - Transaction trends
+/top - Top transactions
+
+**Chat in Groups:**
+- Mention me: @{bot_username} your question
+- Reply to my message
+- Use /ask command
+
+**General Commands:**
+/start - Bot introduction
+/help - Show this help message
+/myid - Show your Telegram user ID
+
+**Note:**
+- Analytics are shared with the group
+- Chat history is personal (use /clear to reset yours)
+- For private conversations, DM me!
+"""
+    else:
+        help_text = """
 🤖 **Financial Analyst Bot - Help**
 
 **Analytics Commands:**
@@ -85,6 +134,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 **General Commands:**
 /start - Start the bot
 /help - Show this help message
+/myid - Show your Telegram user ID
 
 **How to use:**
 - Use commands for specific analytics
@@ -97,6 +147,8 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def analytics_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Show analytics menu with options."""
+    chat = update.effective_chat
+
     keyboard = [
         [
             InlineKeyboardButton("📊 Summary", callback_data='analytics_summary'),
@@ -113,8 +165,14 @@ async def analytics_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
+    message_text = "📊 **Analytics Dashboard**\n\nChoose what you'd like to see:"
+
+    # Add note for groups
+    if chat.type in ['group', 'supergroup']:
+        message_text += "\n\n_Note: Analytics show demo bank data shared with the group._"
+
     await update.message.reply_text(
-        "📊 **Analytics Dashboard**\n\nChoose what you'd like to see:",
+        message_text,
         reply_markup=reply_markup,
         parse_mode='Markdown'
     )
@@ -231,6 +289,37 @@ async def chat_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
+async def my_id_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Show user's Telegram ID."""
+    user = update.effective_user
+
+    info_text = f"""
+🆔 **Your Telegram Information**
+
+**User ID:** `{user.id}`
+**Username:** @{user.username if user.username else 'Not set'}
+**Name:** {user.first_name} {user.last_name if user.last_name else ''}
+
+💡 **What is User ID?**
+- Your unique Telegram identifier
+- Used for admin permissions in bots
+- Different from your username
+
+📝 **To set as admin:**
+Add this to your .env file:
+```
+ADMIN_USER_IDS="{user.id}"
+```
+
+For multiple admins, separate with commas:
+```
+ADMIN_USER_IDS="{user.id},123456789"
+```
+"""
+
+    await update.message.reply_text(info_text, parse_mode='Markdown')
+
+
 async def clear_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Clear chat history."""
     user_id = update.effective_user.id
@@ -267,6 +356,25 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handle regular messages."""
     user_id = update.effective_user.id
     user_message = update.message.text
+    chat = update.effective_chat
+
+    # In groups, only respond if bot is mentioned or replied to
+    if chat.type in ['group', 'supergroup']:
+        bot_username = context.bot.username
+        # Check if message is a reply to bot or mentions bot
+        is_reply_to_bot = (
+            update.message.reply_to_message and
+            update.message.reply_to_message.from_user.id == context.bot.id
+        )
+        is_mentioned = f"@{bot_username}" in user_message.lower() if bot_username else False
+
+        # Only respond if mentioned or replied to
+        if not (is_reply_to_bot or is_mentioned):
+            return
+
+        # Remove bot mention from message
+        if is_mentioned and bot_username:
+            user_message = user_message.replace(f"@{bot_username}", "").strip()
 
     # Show typing indicator
     await update.message.chat.send_action(action="typing")
@@ -278,7 +386,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if any(keyword in user_message.lower() for keyword in financial_keywords):
         analytics_context = AnalyticsEngine.get_insights_text()
 
-    # Get AI response
+    # Get AI response (always use user_id for personal history)
     if analytics_context:
         response = chatbot.chat_with_data_context(
             user_id,
@@ -288,7 +396,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         response = chatbot.chat(user_id, user_message)
 
-    await update.message.reply_text(response)
+    # In groups, reply to the message for context
+    if chat.type in ['group', 'supergroup']:
+        await update.message.reply_text(response)
+    else:
+        await update.message.reply_text(response)
 
 
 async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -315,6 +427,7 @@ def main():
     # Add command handlers
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
+    application.add_handler(CommandHandler("myid", my_id_command))
     application.add_handler(CommandHandler("analytics", analytics_menu))
     application.add_handler(CommandHandler("summary", summary_command))
     application.add_handler(CommandHandler("chat", chat_command))
