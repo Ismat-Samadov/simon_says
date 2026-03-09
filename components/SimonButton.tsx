@@ -3,7 +3,6 @@
 /**
  * A single Simon Says colored button.
  * Lights up with a neon glow when active; dims when inactive.
- * Accepts both click and keyboard events via the parent's handler.
  */
 
 import { motion } from 'framer-motion';
@@ -19,7 +18,7 @@ interface Props {
   onPress: () => void;
   /** Which corner of the 2×2 grid this button occupies */
   corner: 'tl' | 'tr' | 'bl' | 'br';
-  /** Show color name + key hint label (idle / player turn) */
+  /** Show color name + key hint label */
   showLabel?: boolean;
 }
 
@@ -43,44 +42,50 @@ export default function SimonButton({
     <motion.button
       aria-label={`${config.label} button${isActive ? ' (active)' : ''}`}
       aria-pressed={isActive}
-      disabled={!isInteractive}
-      onClick={onPress}
-      whileTap={isInteractive ? { scale: 0.93 } : undefined}
-      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+      // Never use `disabled` — it causes browsers to apply opacity:0.5
+      // which kills the glow effect. Block clicks via onClick guard instead.
+      onClick={() => { if (isInteractive) onPress(); }}
+      whileTap={isInteractive ? { scale: 0.92 } : undefined}
+      transition={{ type: 'spring', stiffness: 400, damping: 18 }}
       className={[
-        'w-full h-full select-none outline-none focus-visible:ring-4 focus-visible:ring-white/50',
+        'w-full h-full select-none outline-none',
         'relative flex items-center justify-center',
-        'transition-[background-color,box-shadow] duration-100',
+        'focus-visible:ring-4 focus-visible:ring-white/50',
         CORNER_RADIUS[corner],
         isInteractive ? 'cursor-pointer' : 'cursor-default',
       ].join(' ')}
       style={{
+        // Inline transition so it always applies regardless of Tailwind version
+        transition: 'background-color 0.12s ease, box-shadow 0.12s ease',
         backgroundColor: isActive ? config.activeColor : config.baseColor,
+        // Active: bright outer glow + tighter inner glow for neon effect
+        // Inactive: plain inset shadow
         boxShadow: isActive
-          ? `0 0 24px 6px ${config.glowColor}cc, 0 0 60px 10px ${config.glowColor}44`
-          : `inset 0 2px 4px rgba(0,0,0,0.5)`,
+          ? `0 0 0 2px ${config.glowColor}40,
+             0 0 20px 4px ${config.glowColor},
+             0 0 50px 12px ${config.glowColor}60,
+             inset 0 0 20px 4px ${config.glowColor}30`
+          : 'inset 0 3px 6px rgba(0,0,0,0.6)',
       }}
     >
-      {/* Gloss highlight */}
-      <span
-        className="absolute inset-0 rounded-[inherit] bg-gradient-to-br from-white/10 to-transparent pointer-events-none"
-      />
+      {/* Gloss sheen */}
+      <span className="absolute inset-0 rounded-[inherit] bg-gradient-to-br from-white/15 to-transparent pointer-events-none" />
 
-      {/* Color name + keyboard shortcut label */}
+      {/* Color name + keyboard key */}
       {showLabel && (
-        <span className="relative flex flex-col items-center gap-0.5 pointer-events-none select-none">
+        <span className="relative z-10 flex flex-col items-center gap-1 pointer-events-none select-none">
           <span
-            className="text-xs sm:text-sm font-bold uppercase tracking-widest"
-            style={{ color: isActive ? '#fff' : `${config.activeColor}cc` }}
+            className="text-xs sm:text-sm font-bold uppercase tracking-widest drop-shadow-md"
+            style={{ color: isActive ? '#fff' : `${config.activeColor}dd` }}
           >
             {config.label}
           </span>
           <kbd
             className="text-[10px] sm:text-xs font-mono px-1.5 py-0.5 rounded border"
             style={{
-              color: isActive ? '#fff' : `${config.activeColor}99`,
-              borderColor: isActive ? '#ffffff60' : `${config.activeColor}44`,
-              backgroundColor: 'rgba(0,0,0,0.3)',
+              color: isActive ? '#ffffffcc' : `${config.activeColor}88`,
+              borderColor: isActive ? '#ffffff40' : `${config.activeColor}33`,
+              backgroundColor: 'rgba(0,0,0,0.35)',
             }}
           >
             {config.key.toUpperCase()}
